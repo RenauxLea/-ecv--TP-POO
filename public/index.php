@@ -45,3 +45,5 @@ $eventDispatcher->dispatch($contentEvent = new ContentEvent($content));
 $content = $contentEvent->content;
 
 echo $content;
+
+
