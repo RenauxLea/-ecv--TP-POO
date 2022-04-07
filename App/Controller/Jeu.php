@@ -65,13 +65,15 @@ class Jeu implements Controller
             $tentative = intval($_COOKIE['tentative']) +1 ;
             setcookie('tentative', strval($tentative));
             setcookie('wordsTry', '');
-
+           
         }
 
-        if($_COOKIE['tentative'] < '5' ){
+        if($_COOKIE['tentative'] < '5'   ){
             $tentative = intval($_COOKIE['tentative']) +1 ;
             setcookie('tentative', strval($tentative));
             $wordToFind = $_COOKIE['wordTofind'];
+            $tentativeRestante = 6 - $tentative;
+            echo " <br /> nombre de tentative restante ", $tentativeRestante;
         }
 
         elseif ($_COOKIE['tentative'] <= '5' ){
@@ -81,9 +83,7 @@ class Jeu implements Controller
 
         
 
-        for ($i = 0 ; $i < strlen($wordToFind); $i++){
-            echo " _ ";
-        }
+        
 
         echo "<br /> ";
         
