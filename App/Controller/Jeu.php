@@ -13,10 +13,9 @@ class Jeu implements Controller
     private string $wordEnter = "";
 
     public function readResponse(){
-        echo nl2br("\n Your word : ");
-        $wordEnter = readline('Enter a word: ');
-        echo $wordEnter; 
-        $this->tentative++;
+        $wordEnter = $_GET['wordEnter'] ;
+        return $wordEnter;
+       
     }
     
     public function compareWord(string $wordToFind , string $wordEnter){
@@ -34,7 +33,7 @@ class Jeu implements Controller
                         
                        
                         $color = "#FF9900";
-                        echo "<span style=\"color: $color\"> $wordEnter[$j]</span> ";
+                        echo "<span style=\"color: $color\"> $wordEnter[$i]</span> ";
                         
                         
                         $check = true;
@@ -47,39 +46,60 @@ class Jeu implements Controller
                 echo  " _ ";
             }
         }
-    }
 
+        echo " <br /> ";
+    }
 
     
 
-    public function render()
-    {
-        echo nl2br("welcome on wordle ! \n  ");
+    public function render(){
+
+        echo nl2br("welcome on wordle ! <br /> Si la lettre est en jaune alors mal placé, si noir bien placé \n  ");
        
-        setcookie('tentative', "0");
+        setcookie('tentative', '0');
 
+        if( $_COOKIE['tentative'] === '0'){
+            $wordToFind =  PickWord::findWord(); 
+            echo "word to find : " , $wordToFind , " <br /> ";
+            setcookie('wordTofind', $wordToFind);
+            $tentative = intval($_COOKIE['tentative']) +1 ;
+            setcookie('tentative', strval($tentative));
+            setcookie('wordsTry', '');
 
-        // if($_COOKIE('tentative') === 0){
-            $wordToFind =  PickWord::findWord();  
-            echo "word to find : " , $wordToFind , " <br /> it length : ", strlen($wordToFind) , " <br />";
+        }
 
-        // }
-        // elseif($_COOKIE('tentative') === )
+        if($_COOKIE['tentative'] < '5' ){
+            $tentative = intval($_COOKIE['tentative']) +1 ;
+            setcookie('tentative', strval($tentative));
+            $wordToFind = $_COOKIE['wordTofind'];
+        }
+
+        elseif ($_COOKIE['tentative'] <= '5' ){
+        setcookie('tentative', '0');
+        echo "vous avez perdu !";
+        }
+
+        
 
         for ($i = 0 ; $i < strlen($wordToFind); $i++){
-        
             echo " _ ";
         }
 
         echo "<br /> ";
+        
+        $responseUser = $this->readResponse();
+        
+        $this->compareWord($wordToFind, $responseUser);
 
+      
+        
+        
 
-        $this->compareWord("aimson", "maison");
+      
+
 
     }
          
-     
-    //    $this->readResponse();
 
 
         
