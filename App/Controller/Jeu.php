@@ -91,6 +91,8 @@ class Jeu implements Controller
             echo " <br /> nombre de tentative restante ", $tentativeRestante;
             if($responseUser === $wordToFind) {
                 echo "<br /> <br /> Vous avez gagné !!!";
+                setcookie('tentative', '0');
+
             }
         }
 
