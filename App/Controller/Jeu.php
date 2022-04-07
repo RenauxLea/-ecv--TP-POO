@@ -17,7 +17,7 @@ class Jeu implements Controller
     }
     
     public function compareWord(string $wordToFind , string $wordEnter){
-        $malPlace = array();
+
 
         for ($i = 0 ; $i < strlen($wordEnter); $i++){
             $check = false;
@@ -104,39 +104,7 @@ class Jeu implements Controller
 
         echo "<br /> ";
 
-      
-        
-        
-
-      
-        
-        
-
-      
-
-
-    }
-         
-
-
-        
-
-        // for ($tentative = 0; $tentative < 6; $tentative++ ){
-        //     if($tentative == 0){
-        //         $wordToFind =  PickWord::findWord();  
-        //         echo "word to find : " , $wordToFind ;
-        //     }
-        //     if($tentative == 6){
-        //         echo "perdu !";
-        //     }
-
-        //     $this->readResponse();
-        // }
-        // $word = WordFactory::createFromURL();
-        // echo $word;
-       
-      
-        
+    }        
     
 }
 
