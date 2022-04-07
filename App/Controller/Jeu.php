@@ -18,36 +18,25 @@ class Jeu implements Controller
         echo $wordEnter; 
         $this->tentative++;
     }
-
-    // public function compareWord(string $wordToFind , string $wordEnter){	    
-
-    //     for($j = 0 ; $j< strlen($wordEnter); $j++){
-    //             for($i=0;$i<=25;$i++){
-
-    //                 if($wordEnter[$j] === chr(97+$i) && $wordToFind[$j] !== chr(97+$i ) && str_contains($wordToFind, chr(97+$i )) ) {
-    //                     echo "<br />",chr(97+$i) ," lettre pas bien placé  ";
-    //                 }
-
-    //                 if($wordEnter[$j] === chr(97+$i) && $wordToFind[$j] === chr(97+$i)) {
-    //                     echo "<br /> lettre bien placé  ";
-    //                 }       
-    //         }
-    //     }
-    // }    
     
     public function compareWord(string $wordToFind , string $wordEnter){
-       
+        $malPlace = array();
+
         for ($i = 0 ; $i < strlen($wordEnter); $i++){
-             $check = false;
-               if ( $wordEnter[$i] === $wordToFind[$i] ){
+            $check = false;
+            if ( $wordEnter[$i] === $wordToFind[$i] ){
                 
-                echo  $wordEnter[$i] , " bien placé   -   ";
-              }
+                echo " ",  $wordEnter[$i], " " ;
+            }
             elseif($wordEnter[$i] !== $wordToFind[$i]){
                 for( $j = 0 ; $j < strlen($wordToFind); $j++){
                     if($wordToFind[$j] === $wordEnter[$i]){
                         
-                        echo  $wordEnter[$i] , " mal placé    -    ";
+                       
+                        $color = "#FF9900";
+                        echo "<span style=\"color: $color\"> $wordEnter[$j]</span> ";
+                        
+                        
                         $check = true;
                         break;
                     }
@@ -55,13 +44,9 @@ class Jeu implements Controller
             }
             if( $wordEnter[$i] !== $wordToFind[$i] && $check === false){
                 
-                echo   $wordEnter[$i] , " pas là    -    ";
+                echo  " _ ";
             }
         }
-
-        
-
-
     }
 
 
@@ -71,14 +56,25 @@ class Jeu implements Controller
     {
         echo nl2br("welcome on wordle ! \n  ");
        
+        setcookie('tentative', "0");
 
-        if($this->tentative === 0){
+
+        // if($_COOKIE('tentative') === 0){
             $wordToFind =  PickWord::findWord();  
             echo "word to find : " , $wordToFind , " <br /> it length : ", strlen($wordToFind) , " <br />";
 
+        // }
+        // elseif($_COOKIE('tentative') === )
+
+        for ($i = 0 ; $i < strlen($wordToFind); $i++){
+        
+            echo " _ ";
         }
 
-        $this->compareWord("peluche", "peliche");
+        echo "<br /> ";
+
+
+        $this->compareWord("aimson", "maison");
 
     }
          
