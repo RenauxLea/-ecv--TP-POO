@@ -8,7 +8,7 @@ use App\Elo\Player;
 
 class PlayersJson implements ConnectorInterface
 {
-    private const FILE_PATH = __DIR__ . '/../../../var/db.json';
+    private const FILE_PATH = __DIR__.'/../../../var/db.json';
     private static array $players = [];
 
     private static function loadFile()
@@ -20,7 +20,7 @@ class PlayersJson implements ConnectorInterface
         return self::$players;
     }
 
-    public static function addPlayer(Player $player)
+    public static function addPlayer(Player $player): void
     {
         self::loadFile();
         self::$players[] = $player;
@@ -32,19 +32,20 @@ class PlayersJson implements ConnectorInterface
     {
         self::loadFile();
 
-        $players = array_filter(self::$players, function($player) use($name) {
+        $players = array_filter(self::$players, function ($player) use ($name) {
             return $player['name'] === $name;
         });
 
-        if (count($players) > 1) {
+        if (\count($players) > 1) {
             throw new \RuntimeException("More than one player found for $name");
         }
 
-        if (count($players) === 0) {
+        if (0 === \count($players)) {
             throw new \RuntimeException("No player found for $name");
         }
 
         $player = reset($players);
+
         return new Player($player['elo'], $player['name']);
     }
 }

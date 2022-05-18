@@ -11,7 +11,7 @@ use App\Infra\EventsDispatcher\ListenerInterface;
 class IsAdmin implements ListenerInterface
 {
     private array $securedControllers = [
-        NewPlayer::class
+        NewPlayer::class,
     ];
 
     public function support($event): bool
@@ -20,12 +20,12 @@ class IsAdmin implements ListenerInterface
     }
 
     /** @param ControllerEvent $event */
-    public function notify($event)
+    public function notify($event): void
     {
-        if (in_array($event->controller::class, $this->securedControllers) && !($event->router::getUser()['isAdmin'] ?? false)) {
-            header("HTTP/1.1 403 Access Denied");
+        if (\in_array($event->controller::class, $this->securedControllers, true) && !($event->router::getUser()['isAdmin'] ?? false)) {
+            header('HTTP/1.1 403 Access Denied');
             echo 'forbidden';
-            die;
+            exit;
         }
     }
 }

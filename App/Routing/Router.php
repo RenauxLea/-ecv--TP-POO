@@ -7,12 +7,12 @@ namespace App\Routing;
 use App\Controller\Controller;
 use App\Controller\Elo;
 use App\Controller\Error404;
+use App\Controller\Jeu;
 use App\Controller\Login;
 use App\Controller\Logout;
+use App\Controller\NewPlayer;
 use App\Controller\Toto;
 use App\Controller\Welcome;
-use App\Controller\NewPlayer;
-use App\Controller\Jeu;
 
 class Router
 {
@@ -24,7 +24,7 @@ class Router
         '/players/add' => NewPlayer::class,
         '/login' => Login::class,
         '/logout' => Logout::class,
-        '/jeu' => Jeu::class
+        '/jeu' => Jeu::class,
     ];
 
     private static string $path;
@@ -38,9 +38,9 @@ class Router
         self::$user = $_SESSION['user'] ?? null;
     }
 
-    public static function getFromGlobals(): Router
+    public static function getFromGlobals(): self
     {
-        if (self::$router === null) {
+        if (null === self::$router) {
             self::$router = new self();
         }
 

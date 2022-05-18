@@ -6,7 +6,7 @@ namespace App\Controller;
 
 class Toto implements Controller
 {
-    public function render()
+    public function render(): void
     {
         echo 'Toto';
     }

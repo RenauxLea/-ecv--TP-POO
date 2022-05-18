@@ -8,7 +8,7 @@ class Lobby
 {
     private array $waitingPlayers = [];
 
-    public function addPlayer(Player $player)
+    public function addPlayer(Player $player): void
     {
         $this->waitingPlayers[] = WaitingPlayerFactory::createFromPlayer($player);
     }

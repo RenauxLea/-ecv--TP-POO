@@ -6,7 +6,7 @@ namespace App\Controller;
 
 class Login implements Controller
 {
-    public function render()
+    public function render(): void
     {
         $_SESSION['is_connected'] = true;
     }

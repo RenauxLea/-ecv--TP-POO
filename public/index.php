@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-use App\EventsListener\IsAuthenticated;
 use App\EventsListener\IsAdmin;
+use App\EventsListener\IsAuthenticated;
 use App\EventsListener\IsDebug;
 use App\Infra\EventsDispatcher\Dispatcher;
-use App\Infra\EventsDispatcher\Events\RouterEvent;
-use App\Infra\EventsDispatcher\Events\ControllerEvent;
 use App\Infra\EventsDispatcher\Events\ContentEvent;
+use App\Infra\EventsDispatcher\Events\ControllerEvent;
+use App\Infra\EventsDispatcher\Events\RouterEvent;
 use App\Routing\Router;
 
 session_start();
 
 // $_SESSION['user'] = null;
-//$_SESSION['user'] = ['isAdmin' => false];
+// $_SESSION['user'] = ['isAdmin' => false];
 $_SESSION['user'] = ['isAdmin' => true];
 
-spl_autoload_register(function($fqcn) {
+spl_autoload_register(function ($fqcn): void {
     $path = str_replace('\\', '/', $fqcn);
-    require_once (__DIR__.'/../'.$path.'.php');
+    require_once __DIR__.'/../'.$path.'.php';
 });
 
 define('APP_ENV', 'dev');
@@ -45,5 +45,3 @@ $eventDispatcher->dispatch($contentEvent = new ContentEvent($content));
 $content = $contentEvent->content;
 
 echo $content;
-
-

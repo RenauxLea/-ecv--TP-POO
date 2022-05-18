@@ -15,12 +15,12 @@ class IsAuthenticated implements ListenerInterface
     }
 
     /** @param RouterEvent $event */
-    public function notify($event)
+    public function notify($event): void
     {
         if (null === $event->router::getUser()) {
-            header("HTTP/1.1 401 Unauthorized");
+            header('HTTP/1.1 401 Unauthorized');
             echo 'non autorisé';
-            die;
+            exit;
         }
     }
 }
