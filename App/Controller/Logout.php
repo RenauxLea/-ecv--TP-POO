@@ -6,7 +6,7 @@ namespace App\Controller;
 
 class Logout implements Controller
 {
-    public function render()
+    public function render(): void
     {
         session_destroy();
     }

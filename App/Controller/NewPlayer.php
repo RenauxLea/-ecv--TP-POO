@@ -9,7 +9,7 @@ use App\Infra\Memory\DbSelector;
 
 class NewPlayer implements Controller
 {
-    public function render()
+    public function render(): void
     {
         $player = PlayerFactory::createFromURL();
         DbSelector::getConnector()::addPlayer($player);

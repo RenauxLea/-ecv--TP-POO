@@ -10,7 +10,7 @@ use App\Infra\Memory\DbSelector;
 
 class Elo implements Controller
 {
-    public function render()
+    public function render(): void
     {
         $player1 = $_GET['player1'] ?? '';
         $player2 = $_GET['player2'] ?? '';
@@ -20,13 +20,14 @@ class Elo implements Controller
             $player2 = DbSelector::getConnector()::findPlayer($player2);
         } catch (\RuntimeException $e) {
             echo $e->getMessage();
+
             return;
         }
 
         echo sprintf(
             'Greg à %.2f%% chance de gagner face a Jade',
                 Encounter::probabilityAgainst($player1, $player2) * 100
-        ) . PHP_EOL;
+        ).\PHP_EOL;
 
         // Imaginons que greg l'emporte tout de même.
         Encounter::setNewLevel($player1, $player2, Encounter::RESULT_WINNER);

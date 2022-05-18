@@ -16,12 +16,11 @@ class IsDebug implements ListenerInterface
     }
 
     /** @param ControllerEvent $event */
-    public function notify($event)
+    public function notify($event): void
     {
-        if (APP_ENV==='dev') {
+        if (APP_ENV === 'dev') {
             // decoration ici
             $event->controller = new Debug($event->controller);
-            
         }
     }
 }

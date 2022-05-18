@@ -18,7 +18,7 @@ class Encounter
 
     public static function setNewLevel(Player $playerOne, Player $playerTwo, int $playerOneResult): void
     {
-        if (!in_array($playerOneResult, self::RESULT_POSSIBILITIES)) {
+        if (!\in_array($playerOneResult, self::RESULT_POSSIBILITIES, true)) {
             trigger_error(sprintf('Invalid result. Expected %s', implode(' or ', self::RESULT_POSSIBILITIES)));
         }
 

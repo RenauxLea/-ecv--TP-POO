@@ -9,7 +9,6 @@ class WordFactory
     public static function createFromURL(): Word
     {
         $word = $_GET['word'] ?? null;
-       
 
         return new Word($word);
     }
